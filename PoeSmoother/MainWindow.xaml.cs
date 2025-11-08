@@ -144,6 +144,7 @@ public partial class MainWindow : Window
 
         // Disable buttons during operation
         ApplyButton.IsEnabled = false;
+        ZoomSlider.IsEnabled = false;
         ProgressBar.Visibility = Visibility.Visible;
         ProgressBar.IsIndeterminate = false;
         ProgressBar.Minimum = 0;
@@ -193,6 +194,7 @@ public partial class MainWindow : Window
             ApplyButton.IsEnabled = true;
             ProgressBar.Visibility = Visibility.Collapsed;
             ProgressBar.Value = 0;
+            ZoomSlider.IsEnabled = true;
         }
     }
 

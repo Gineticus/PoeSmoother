@@ -11,5 +11,11 @@
   <ItemGroup>
     <PackageReference Include="LibGGPK3.LibBundledGGPK3" Version="2.6.10" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="oo2core.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

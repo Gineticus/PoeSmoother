@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="PoE Smoother" Height="710" Width="520"
+        Title="PoE Smoother" Height="550" Width="550"
         WindowStartupLocation="CenterScreen"
         Background="#1E1E1E">
     <Grid Margin="15">

@@ -40,19 +40,10 @@ jobs:
         body: |
           ## PoE Smoother ${{ github.ref_name }}
           
-          ### What's New
-          - Performance improvements and bug fixes
-          
           ### Installation
           1. Download `PoeSmoother-${{ github.ref_name }}-win-x64.zip`
           2. Extract the archive
           3. Run `PoeSmoother.exe`
-          
-          ### Features
-          - Dark themed UI
-          - True progress bar
-          - Apply patches individually or all at once
-          - Supports both GGPK and index.bin files
           
           ### System Requirements
           - Windows 10 version 2004 or later

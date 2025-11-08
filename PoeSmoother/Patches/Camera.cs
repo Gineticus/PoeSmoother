@@ -20,9 +20,14 @@ public class Camera : IPatch
         ".otc",
     };
 
-    private readonly double zoomLevel;
+    private double zoomLevel;
 
     public Camera(double zoom = 2.4)
+    {
+        zoomLevel = zoom;
+    }
+
+    public void SetZoomLevel(double zoom)
     {
         zoomLevel = zoom;
     }

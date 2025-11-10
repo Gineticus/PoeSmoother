@@ -32,8 +32,7 @@ public class Fog : IPatch
                     var bytes = record.Read();
                     string data = System.Text.Encoding.Unicode.GetString(bytes.ToArray());
 
-                    data = data.Replace("fog", "xog")
-                        .Replace("screenspace_xog", "screenspace_fog");
+                    data = data.Replace("\"fog\"", "\"xog\"");
 
                     var newBytes = System.Text.Encoding.Unicode.GetBytes(data);
                     record.Write(newBytes);

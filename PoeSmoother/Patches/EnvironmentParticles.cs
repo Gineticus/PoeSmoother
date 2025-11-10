@@ -32,9 +32,10 @@ public class EnvironmentParticles : IPatch
                     var bytes = record.Read();
                     string data = System.Text.Encoding.Unicode.GetString(bytes.ToArray());
 
-                    data = data.Replace("area", "xrea")
-                        .Replace("fog", "xog")
-                        .Replace("effect_spawner", "xffect_spawner");
+                    data = data.Replace("\"area\"", "\"xrea\"")
+                        .Replace("\"fog\"", "\"xog\"")
+                        .Replace("\"screenspace_fog\"", "\"xcreenspace_fog\"")
+                        .Replace("\"effect_spawner\"", "\"xffect_spawner\"");
 
                     var newBytes = System.Text.Encoding.Unicode.GetBytes(data);
                     record.Write(newBytes);

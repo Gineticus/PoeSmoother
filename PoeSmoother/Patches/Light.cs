@@ -32,10 +32,10 @@ public class Light : IPatch
                     var bytes = record.Read();
                     string data = System.Text.Encoding.Unicode.GetString(bytes.ToArray());
 
-                    data = data.Replace("directional_light", "xirectional_light")
-                        .Replace("player_light", "xlayer_light")
-                        .Replace("environment_mapping", "xnvironment_mapping")
-                        .Replace("global_illumination", "xlobal_illumination");
+                    data = data.Replace("\"directional_light\"", "\"xirectional_light\"")
+                        .Replace("\"player_light\"", "\"xlayer_light\"")
+                        .Replace("\"environment_mapping\"", "\"xnvironment_mapping\"")
+                        .Replace("\"global_illumination\"", "\"xlobal_illumination\"");
                     
                     var newBytes = System.Text.Encoding.Unicode.GetBytes(data);
                     record.Write(newBytes);

@@ -5,31 +5,31 @@
 ## Features
 
 - **Camera Patch**
-  - Adjustable default camera zoom level (1.2x to 2.4x)
+  - Allows adjusting the default camera zoom level (1.2x to 2.4x)
 
 - **Fog Patch**
-  - Disables the default fog effect for clearer visibility
+  - Disables the default fog effect in the game
 
 - **Environment Particles Patch**
-  - Reduces environmental particle effects for better performance
+  - Disables the default environment particles in the game
 
 - **Minimap Patch**
-  - Enhancements to minimap rendering
+  - Reveals the entire minimap by default
 
 - **Shadow Patch**
-  - Optimizes shadow rendering
+  - Disables the default shadow effect in the game
 
 - **Light Patch**
-  - Adjusts lighting effects
+  - Disables the default light effect in the game
 
 - **Corpse Patch**
-  - Optimizes corpse rendering
+  - Removes corpses from the game
 
 - **Delirium Patch**
-  - Reduces Delirium visual effects
+  - Disables the delirium effects in the game
 
 - **Particles Patch**
-  - General particle effect optimizations
+  - Disables all particle effects in the game
 
 ## Installation
 

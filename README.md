@@ -1,4 +1,4 @@
-<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Gineticus/PoeSmoother?style=for-the-badge&logo=github&color=%23232929"> <img alt="GitHub Release" src="https://img.shields.io/github/v/release/Gineticus/PoeSmoother?style=for-the-badge&logo=github&color=%23232929">
+<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Gineticus/PoeSmoother?style=for-the-badge&logo=github&color=%23292929"> <img alt="GitHub Release" src="https://img.shields.io/github/v/release/Gineticus/PoeSmoother?style=for-the-badge&logo=github&color=%23292929">
 
 # PoeSmoother
 

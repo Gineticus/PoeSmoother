@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="PoE Smoother" Height="550" Width="550"
+        Title="PoE Smoother" Height="600" Width="600"
         WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
         Background="{StaticResource DarkBackground}">
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -23,14 +24,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <TextBlock Grid.Column="0"
                        Text="PoE Smoother" 
                        FontSize="20" 
                        FontWeight="Bold" 
                        VerticalAlignment="Center"
                        Foreground="{StaticResource DarkTextPrimary}"/>
-            
+
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="Game:" 
                            VerticalAlignment="Center" 
@@ -88,7 +89,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <StackPanel Grid.Column="0" Orientation="Horizontal">
                         <Button Content="Select All" 
                                 Click="SelectAllButton_Click" 
@@ -100,8 +101,14 @@
                                 MinWidth="80"
                                 FontSize="11"
                                 Style="{StaticResource SecondaryButton}"/>
+                        <Button Content="Mods Colors" 
+                                Click="ModsColorsButton_Click" 
+                                MinWidth="80"
+                                FontSize="11"
+                                Style="{StaticResource SecondaryButton}"
+                                x:Name="ModsColorsButton"/>
                     </StackPanel>
-                    
+
                     <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Text="Camera Zoom:" 
                                    VerticalAlignment="Center" 
@@ -120,9 +127,9 @@
                                 ValueChanged="ZoomSlider_ValueChanged"/>
                         <TextBlock x:Name="ZoomValueText"
                                    Text="2.4"
-                                   Width="30"
                                    VerticalAlignment="Center"
                                    Margin="8,0,0,0"
+                                   Width="20"
                                    FontSize="11"
                                    Foreground="{StaticResource DarkTextSecondary}"/>
                     </StackPanel>

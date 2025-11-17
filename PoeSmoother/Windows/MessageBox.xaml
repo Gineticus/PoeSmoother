@@ -6,10 +6,8 @@
         Width="400"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
-        WindowStyle="None"
-        Background="{StaticResource DarkBackground}"
-        BorderBrush="{StaticResource DarkBorder}"
-        BorderThickness="1">
+        WindowStyle="SingleBorderWindow"
+        Background="{StaticResource DarkBackground}">
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -1,3 +1,8 @@
+using LibBundle3;
+using LibBundledGGPK3;
+using Microsoft.Win32;
+using PoeSmoother.Models;
+using PoeSmoother.Patches;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -5,29 +10,26 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
-using LibBundle3;
-using LibBundledGGPK3;
-using Microsoft.Win32;
-using PoeSmoother.Patches;
-using PoeSmoother.Models;
 
 namespace PoeSmoother;
 
 public partial class MainWindow : Window
 {
     private readonly ObservableCollection<PatchViewModel> _patches;
+    private readonly ObservableCollection<ColorModsViewModel> _colorMods;
     private string _ggpkPath = string.Empty;
+    private double _cameraZoom = 2.4;
 
     public MainWindow()
     {
-
         _patches = new ObservableCollection<PatchViewModel>();
+        _colorMods = new ObservableCollection<ColorModsViewModel>();
         InitializeComponent();
         PatchesItemsControl.ItemsSource = _patches;
+        
         UpdateStatus();
 
-        // Apply dark title bar
-        Loaded += (s, e) => ApplyDarkTitleBar();
+        SourceInitialized += (s, e) => ApplyDarkTitleBar();
     }
 
     private void ApplyDarkTitleBar()
@@ -52,6 +54,7 @@ public partial class MainWindow : Window
         {
             new Camera(),
             new Minimap(),
+            new ColorMods(),
             new Fog(),
             new EnvironmentParticles(),
             new Shadow(),
@@ -64,6 +67,13 @@ public partial class MainWindow : Window
         foreach (var patch in patchInstances)
         {
             _patches.Add(new PatchViewModel(patch));
+            if (patch is ColorMods colorModsPatch)
+            {
+                foreach (var option in colorModsPatch.ColorModsOptions)
+                {
+                    _colorMods.Add(new ColorModsViewModel(option.Copy()));
+                }
+            }
         }
     }
 
@@ -92,11 +102,12 @@ public partial class MainWindow : Window
 
     private void GameSelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
-        if (_patches == null) return;
+        if (_patches == null || _colorMods == null) return;
 
         var selectedIndex = ((System.Windows.Controls.ComboBox)sender).SelectedIndex;
 
         _patches.Clear();
+        _colorMods.Clear();
 
         if (selectedIndex == 0) // PoE 1
         {
@@ -107,14 +118,29 @@ public partial class MainWindow : Window
             InitializePoe2Patches();
         }
 
-        if (ZoomSlider != null)
+        if (ModsColorsButton != null)
         {
-            foreach (var patch in _patches)
+            ModsColorsButton.Visibility = _colorMods.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+    }
+
+    private void ModsColorsButton_Click(object sender, RoutedEventArgs e)
+    {
+        var result = ColorModsEditor.Show(_colorMods);
+        if (result == true)
+        {
+            foreach (var colorMod in _colorMods)
             {
-                if (patch.Patch is Camera cameraPatch)
-                {
-                    cameraPatch.ZoomLevel = ZoomSlider.Value;
-                }
+                colorMod.Option.Color = colorMod.SelectedColor;
+                colorMod.Option.IsEnabled = colorMod.IsSelected;
+            }
+        }
+        else
+        {
+            foreach (var colorMod in _colorMods)
+            {
+                colorMod.IsSelected = colorMod.Option.IsEnabled;
+                colorMod.SelectedColor = colorMod.Option.Color;
             }
         }
     }
@@ -157,22 +183,24 @@ public partial class MainWindow : Window
         {
             ZoomValueText.Text = e.NewValue.ToString("F1").Replace(',', '.');
         }
-
-        if (_patches != null)
-        {
-            foreach (var patch in _patches)
-            {
-                if (patch.Patch is Camera cameraPatch)
-                {
-                    cameraPatch.ZoomLevel = e.NewValue;
-                }
-            }
-        }
+        _cameraZoom = e.NewValue;
     }
 
     private async void ApplyButton_Click(object sender, RoutedEventArgs e)
     {
         var selectedPatches = _patches.Where(p => p.IsSelected).ToList();
+
+        foreach (var patch in selectedPatches)
+        {
+            if (patch.Patch is Camera cameraPatch)
+            {
+                cameraPatch.ZoomLevel = _cameraZoom;
+            }
+            if (patch.Patch is ColorMods colorModsPatch)
+            {
+                colorModsPatch.ColorModsOptions = _colorMods.Select(cm => cm.Option.Copy()).ToList();
+            }
+        }
 
         if (selectedPatches.Count == 0)
         {
@@ -193,7 +221,7 @@ public partial class MainWindow : Window
 
         // Disable buttons during operation
         ApplyButton.IsEnabled = false;
-        ZoomSlider.IsEnabled = false;
+        //ZoomSlider.IsEnabled = false;
         ProgressBar.Visibility = Visibility.Visible;
         ProgressBar.IsIndeterminate = false;
         ProgressBar.Minimum = 0;
@@ -239,7 +267,7 @@ public partial class MainWindow : Window
             ApplyButton.IsEnabled = true;
             ProgressBar.Visibility = Visibility.Collapsed;
             ProgressBar.Value = 0;
-            ZoomSlider.IsEnabled = true;
+            //ZoomSlider.IsEnabled = true;
         }
     }
 

@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeSmoother", "PoeSmoother\PoeSmoother.csproj", "{E5B02FC2-A2BD-36EC-E940-3877B7C4CB3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5B02FC2-A2BD-36EC-E940-3877B7C4CB3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5B02FC2-A2BD-36EC-E940-3877B7C4CB3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5B02FC2-A2BD-36EC-E940-3877B7C4CB3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5B02FC2-A2BD-36EC-E940-3877B7C4CB3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC06C318-34A2-4A93-9F99-D5AF4E0D43CE}
+	EndGlobalSection
+EndGlobal

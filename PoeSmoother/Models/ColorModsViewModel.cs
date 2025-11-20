@@ -23,6 +23,11 @@ public class ColorModsViewModel : INotifyPropertyChanged
             if (_isSelected != value)
             {
                 _isSelected = value;
+                // Keep underlying option in sync so patches read current selection
+                if (Option != null)
+                {
+                    Option.IsEnabled = _isSelected;
+                }
                 OnPropertyChanged();
             }
         }
@@ -36,6 +41,11 @@ public class ColorModsViewModel : INotifyPropertyChanged
             if (_selectedColor != value)
             {
                 _selectedColor = value;
+                // Keep underlying option in sync so patches read current color
+                if (Option != null)
+                {
+                    Option.Color = _selectedColor;
+                }
                 OnPropertyChanged();
             }
         }

@@ -30,7 +30,7 @@ public class Corpse : IPatch
                                 var bytes = record.Read();
                                 string data = System.Text.Encoding.Unicode.GetString(bytes.ToArray());
 
-                                data = data.Replace("Life\r\n{\r\n}", "Life\r\n{\r\n\ton_spawned_dead = \"RemoveEffects(); DisableRendering();\"\r\n\ton_death = \"RemoveEffects(); DisableRendering();\"\r\n}");
+                                data = data.Replace("Life\r\n{\r\n}", "Life\r\n{\r\n\ton_spawned_dead = \"RemoveEffects(); DisableRendering();\"\r\n\ton_death = \"Delay( 1.0, { DisableRendering(); } );\"\r\n}");
                                 data = data.Replace("slow_animations_go_to_idle = true\r\n}", "slow_animations_go_to_idle = true\r\n\ton_start_Revive = \"RemoveEffects(); EnableRendering();\"\r\n}");
 
                                 var newBytes = System.Text.Encoding.Unicode.GetBytes(data);

@@ -63,6 +63,7 @@ public partial class MainWindow : Window
             new Delirium(),
             new Particles(),
             new MuteCryingBaby(),
+            new MuteUniqueDropSound(),
         };
 
         foreach (var patch in patchInstances)

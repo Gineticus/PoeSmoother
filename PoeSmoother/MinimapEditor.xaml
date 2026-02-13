@@ -1,0 +1,84 @@
+<Window x:Class="PoeSmoother.MinimapEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Minimap Editor" Height="460" Width="237"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource DarkBackground}">
+	<Grid Margin="10,10,0,-3">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<!-- Reveal Threshold -->
+		<!--<GroupBox Header="Reveal Threshold (0-1)" Grid.Row="0" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="RevealSlider" Width="150" Minimum="0" Maximum="1" Value="0.18" TickFrequency="0.01" IsSnapToTickEnabled="True" Style="{StaticResource RoundGreySlider}" ValueChanged="RevealSlider_ValueChanged"/>
+                <TextBox x:Name="RevealValueText" Text="{Binding Value, ElementName=RevealSlider, Mode=TwoWay, StringFormat=F2, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" Width="40" VerticalAlignment="Center" Foreground="{StaticResource DarkTextSecondary}" TextChanged="RevealValueText_TextChanged"/>
+            </StackPanel>
+        </GroupBox>
+        -->
+		<!-- Unrevealed Background -->
+		<GroupBox Header="Unrevealed Background" Grid.Row="1" Margin="0,0,0,10">
+			<StackPanel>
+				<Button Content="Pick Color" Click="UnrevealedPickColor_Click" Width="80" FontSize="11"/>
+				<Rectangle x:Name="UnrevealedPreview" Width="50" Height="20" Margin="0,5,0,0" Fill="Black" Stroke="{StaticResource DarkBorder}"/>
+				<StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+					<TextBlock Text="Opacity:" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="11" Foreground="{StaticResource DarkTextPrimary}"/>
+					<Slider x:Name="UnrevealedASlider" Width="100" Minimum="0" Maximum="1" Value="0.01" TickFrequency="0.01" IsSnapToTickEnabled="True" Style="{StaticResource RoundGreySlider}" ValueChanged="UnrevealedASlider_ValueChanged"/>
+					<TextBox x:Name="UnrevealedAValueText" Text="{Binding Value, ElementName=UnrevealedASlider, Mode=TwoWay, StringFormat=F2, UpdateSourceTrigger=PropertyChanged}" Margin="8,0,0,0" Width="40" VerticalAlignment="Center" Foreground="{StaticResource DarkTextSecondary}" TextChanged="UnrevealedAValueText_TextChanged"/>
+				</StackPanel>
+			</StackPanel>
+		</GroupBox>
+
+		<!-- Revealed Area -->
+		<!--
+        <GroupBox Header="Revealed Area" Grid.Row="2" Margin="0,0,0,10">
+            <StackPanel>
+                <Button Content="Pick Color" Click="RevealedPickColor_Click" Width="80" FontSize="11"/>
+                <Rectangle x:Name="RevealedPreview" Width="50" Height="20" Margin="0,5,0,0" Fill="Transparent" Stroke="{StaticResource DarkBorder}"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="Opacity:" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="11" Foreground="{StaticResource DarkTextPrimary}"/>
+                    <Slider x:Name="RevealedASlider" Width="100" Minimum="0" Maximum="1" Value="0.0" TickFrequency="0.01" IsSnapToTickEnabled="True" Style="{StaticResource RoundGreySlider}" ValueChanged="RevealedASlider_ValueChanged"/>
+                    <TextBox x:Name="RevealedAValueText" Text="{Binding Value, ElementName=RevealedASlider, Mode=TwoWay, StringFormat=F2, UpdateSourceTrigger=PropertyChanged}" Margin="8,0,0,0" Width="40" VerticalAlignment="Center" Foreground="{StaticResource DarkTextSecondary}" TextChanged="RevealedAValueText_TextChanged"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+    -->
+		<!-- Outline -->
+		<GroupBox Header="Outline" Grid.Row="3" Margin="0,0,0,10">
+			<StackPanel>
+				<Button Content="Pick Color" Click="OutlinePickColor_Click" Width="80" FontSize="11"/>
+				<Rectangle x:Name="OutlinePreview" Width="50" Height="20" Margin="0,5,0,0" Fill="White" Stroke="{StaticResource DarkBorder}"/>
+				<StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+					<TextBlock Text="Opacity:" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="11" Foreground="{StaticResource DarkTextPrimary}"/>
+					<Slider x:Name="OutlineASlider" Width="100" Minimum="0" Maximum="1" Value="1.0" TickFrequency="0.01" IsSnapToTickEnabled="True" Style="{StaticResource RoundGreySlider}" ValueChanged="OutlineASlider_ValueChanged"/>
+					<TextBox x:Name="OutlineAValueText" Text="{Binding Value, ElementName=OutlineASlider, Mode=TwoWay, StringFormat=F2, UpdateSourceTrigger=PropertyChanged}" Margin="8,0,0,0" Width="40" VerticalAlignment="Center" Foreground="{StaticResource DarkTextSecondary}" TextChanged="OutlineAValueText_TextChanged"/>
+				</StackPanel>
+			</StackPanel>
+		</GroupBox>
+
+		<!-- Exploration Front -->
+		<GroupBox Header="Exploration Front" Grid.Row="4" Margin="0,0,0,10">
+			<StackPanel>
+				<Button Content="Pick Color" Click="FrontPickColor_Click" Width="80" FontSize="11"/>
+				<Rectangle x:Name="FrontPreview" Width="50" Height="20" Margin="0,5,0,0" Fill="Blue" Stroke="{StaticResource DarkBorder}"/>
+				<StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+					<TextBlock Text="Opacity:" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="11" Foreground="{StaticResource DarkTextPrimary}"/>
+					<Slider x:Name="FrontASlider" Width="100" Minimum="0" Maximum="1" Value="0.5" TickFrequency="0.01" IsSnapToTickEnabled="True" Style="{StaticResource RoundGreySlider}" ValueChanged="FrontASlider_ValueChanged"/>
+					<TextBox x:Name="FrontAValueText" Text="{Binding Value, ElementName=FrontASlider, Mode=TwoWay, StringFormat=F2, UpdateSourceTrigger=PropertyChanged}" Margin="8,0,0,0" Width="40" VerticalAlignment="Center" Foreground="{StaticResource DarkTextSecondary}" TextChanged="FrontAValueText_TextChanged"/>
+				</StackPanel>
+			</StackPanel>
+		</GroupBox>
+
+		<!-- OK/Cancel -->
+		<StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
+			<Button Content="OK" Click="OKButton_Click" Width="75"/>
+			<Button Content="Cancel" Click="CancelButton_Click" Width="75"/>
+		</StackPanel>
+	</Grid>
+</Window>

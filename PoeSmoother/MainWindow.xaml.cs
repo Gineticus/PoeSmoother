@@ -20,13 +20,16 @@ public partial class MainWindow : Window
     private double _cameraZoom = 2.4;
     private string? _updateDownloadUrl;
 
+    // NEW: To hold minimap settings
+    private Minimap minimapSettings = new Minimap();
+
     public MainWindow()
     {
         _patches = new ObservableCollection<PatchViewModel>();
         _colorMods = new ObservableCollection<ColorModsViewModel>();
         InitializeComponent();
         PatchesItemsControl.ItemsSource = _patches;
-        
+
         UpdateStatus();
 
         SourceInitialized += (s, e) => ApplyDarkTitleBar();
@@ -149,9 +152,35 @@ public partial class MainWindow : Window
         }
     }
 
+    // NEW: Minimap Editor Button Click
+    private void MinimapEditorButton_Click(object sender, RoutedEventArgs e)
+    {
+        var editor = new MinimapEditor();
+        if (editor.ShowDialog() == true)
+        {
+          //  minimapSettings.RevealThreshold = editor.RevealThreshold;
+            minimapSettings.UnrevealedR = editor.UnrevealedR;
+            minimapSettings.UnrevealedG = editor.UnrevealedG;
+            minimapSettings.UnrevealedB = editor.UnrevealedB;
+            minimapSettings.UnrevealedA = editor.UnrevealedA;
+        //    minimapSettings.RevealedR = editor.RevealedR;
+        //    minimapSettings.RevealedG = editor.RevealedG;
+        //    minimapSettings.RevealedB = editor.RevealedB;
+        //    minimapSettings.RevealedA = editor.RevealedA;
+            minimapSettings.OutlineR = editor.OutlineR;
+            minimapSettings.OutlineG = editor.OutlineG;
+            minimapSettings.OutlineB = editor.OutlineB;
+            minimapSettings.OutlineA = editor.OutlineA;
+            minimapSettings.FrontR = editor.FrontR;
+            minimapSettings.FrontG = editor.FrontG;
+            minimapSettings.FrontB = editor.FrontB;
+            minimapSettings.FrontA = editor.FrontA;
+        }
+    }
+
     private void BrowseButton_Click(object sender, RoutedEventArgs e)
     {
-        var openFileDialog = new OpenFileDialog
+        var openFileDialog = new Microsoft.Win32.OpenFileDialog
         {
             Filter = "GGPK Files (*.ggpk;*.bin)|*.ggpk;*.bin|All Files (*.*)|*.*",
             Title = "Select GGPK or Index File"
@@ -204,11 +233,32 @@ public partial class MainWindow : Window
             {
                 colorModsPatch.ColorModsOptions = _colorMods.Select(cm => cm.Option.Copy()).ToList();
             }
+            if (patch.Patch is Minimap minimapPatch)
+            {
+                // NEW: Set from settings
+                minimapPatch.RevealThreshold = minimapSettings.RevealThreshold;
+                minimapPatch.UnrevealedR = minimapSettings.UnrevealedR;
+                minimapPatch.UnrevealedG = minimapSettings.UnrevealedG;
+                minimapPatch.UnrevealedB = minimapSettings.UnrevealedB;
+                minimapPatch.UnrevealedA = minimapSettings.UnrevealedA;
+                minimapPatch.RevealedR = minimapSettings.RevealedR;
+                minimapPatch.RevealedG = minimapSettings.RevealedG;
+                minimapPatch.RevealedB = minimapSettings.RevealedB;
+                minimapPatch.RevealedA = minimapSettings.RevealedA;
+                minimapPatch.OutlineR = minimapSettings.OutlineR;
+                minimapPatch.OutlineG = minimapSettings.OutlineG;
+                minimapPatch.OutlineB = minimapSettings.OutlineB;
+                minimapPatch.OutlineA = minimapSettings.OutlineA;
+                minimapPatch.FrontR = minimapSettings.FrontR;
+                minimapPatch.FrontG = minimapSettings.FrontG;
+                minimapPatch.FrontB = minimapSettings.FrontB;
+                minimapPatch.FrontA = minimapSettings.FrontA;
+            }
         }
 
         if (selectedPatches.Count == 0)
         {
-            MessageBox.Show("Please select at least one patch to apply.", "No Patches Selected");
+            System.Windows.MessageBox.Show("Please select at least one patch to apply.", "No Patches Selected");
             return;
         }
 
@@ -219,7 +269,7 @@ public partial class MainWindow : Window
     {
         if (string.IsNullOrEmpty(_ggpkPath) || !File.Exists(_ggpkPath))
         {
-            MessageBox.Show("Please select a valid GGPK file first.", "Invalid File");
+            System.Windows.MessageBox.Show("Please select a valid GGPK file first.", "Invalid File");
             return;
         }
 
@@ -227,7 +277,6 @@ public partial class MainWindow : Window
 
         // Disable buttons during operation
         ApplyButton.IsEnabled = false;
-        //ZoomSlider.IsEnabled = false;
         ProgressBar.Visibility = Visibility.Visible;
         ProgressBar.IsIndeterminate = false;
         ProgressBar.Minimum = 0;
@@ -260,12 +309,12 @@ public partial class MainWindow : Window
             });
 
             StatusTextBlock.Text = $"Successfully applied {patchesToApply.Count} patch(es)!";
-            MessageBox.Show($"Successfully applied {patchesToApply.Count} patch(es)!", "Success");
+            System.Windows.MessageBox.Show($"Successfully applied {patchesToApply.Count} patch(es)!", "Success");
         }
         catch (Exception ex)
         {
             StatusTextBlock.Text = "Error occurred while applying patches.";
-            MessageBox.Show($"Error applying patches:\n\n{ex.Message}", "Error");
+            System.Windows.MessageBox.Show($"Error applying patches:\n\n{ex.Message}", "Error");
         }
         finally
         {
@@ -273,7 +322,6 @@ public partial class MainWindow : Window
             ApplyButton.IsEnabled = true;
             ProgressBar.Visibility = Visibility.Collapsed;
             ProgressBar.Value = 0;
-            //ZoomSlider.IsEnabled = true;
         }
     }
 
@@ -349,7 +397,7 @@ public partial class MainWindow : Window
             }
             catch
             {
-                MessageBox.Show("Could not open the download page. Please visit the GitHub releases page manually.", "Error");
+                System.Windows.MessageBox.Show("Could not open the download page. Please visit the GitHub releases page manually.", "Error");
             }
         }
     }

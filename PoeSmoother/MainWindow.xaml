@@ -123,6 +123,12 @@
                                 FontSize="11"
                                 Style="{StaticResource SecondaryButton}"
                                 x:Name="ModsColorsButton"/>
+                        <Button Content="Minimap Editor" 
+                                Click="MinimapEditorButton_Click" 
+                                MinWidth="100"
+                                FontSize="11"
+                                 Style="{StaticResource SecondaryButton}"
+                                x:Name="MinimapEditorButton"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">

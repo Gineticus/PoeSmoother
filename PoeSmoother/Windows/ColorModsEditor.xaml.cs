@@ -1,9 +1,10 @@
 ﻿using PoeSmoother.Models;
 using System.Collections.ObjectModel;
-using System.Media;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
+using Microsoft.Win32;
+using System.Text.Json;
 
 namespace PoeSmoother;
 
@@ -18,7 +19,7 @@ public partial class ColorModsEditor : Window
 
     private void ApplyDarkTitleBar()
     {
-        if (PresentationSource.FromVisual(this) is HwndSource hwndSource)
+        if (System.Windows.PresentationSource.FromVisual(this) is HwndSource hwndSource)
         {
             IntPtr hwnd = hwndSource.Handle;
 
@@ -49,7 +50,7 @@ public partial class ColorModsEditor : Window
         var colorMods = ColorModsItemsControl.ItemsSource as ObservableCollection<ColorModsViewModel>;
         if (colorMods == null)
         {
-            MessageBox.Show("No color mods to save.", "Error");
+            System.Windows.MessageBox.Show("No color mods to save.", "Error");
             return;
         }
         var saveFileDialog = new Microsoft.Win32.SaveFileDialog
@@ -58,7 +59,8 @@ public partial class ColorModsEditor : Window
             DefaultExt = ".json",
             FileName = "color_mods.json"
         };
-        if (saveFileDialog.ShowDialog() == true)
+        bool? result = saveFileDialog.ShowDialog();
+        if (result == true)
         {
             var colorModsDict = new Dictionary<string, object>();
             foreach (var mod in colorMods)
@@ -69,14 +71,14 @@ public partial class ColorModsEditor : Window
                     color = mod.SelectedColor,
                 };
             }
-            var options = new System.Text.Json.JsonSerializerOptions 
-            { 
+            var options = new System.Text.Json.JsonSerializerOptions
+            {
                 WriteIndented = true,
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
             var json = System.Text.Json.JsonSerializer.Serialize(colorModsDict, options);
             System.IO.File.WriteAllText(saveFileDialog.FileName, json);
-            MessageBox.Show("Color mods saved successfully.", "Success");
+            System.Windows.MessageBox.Show("Color mods saved successfully.", "Success");
         }
     }
 
@@ -85,7 +87,7 @@ public partial class ColorModsEditor : Window
         var colorMods = ColorModsItemsControl.ItemsSource as ObservableCollection<ColorModsViewModel>;
         if (colorMods == null)
         {
-            MessageBox.Show("No color mods to load.", "Error");
+            System.Windows.MessageBox.Show("No color mods to load.", "Error");
             return;
         }
         var openFileDialog = new Microsoft.Win32.OpenFileDialog
@@ -93,7 +95,8 @@ public partial class ColorModsEditor : Window
             Filter = "JSON Files (*.json)|*.json",
             DefaultExt = ".json",
         };
-        if (openFileDialog.ShowDialog() == true)
+        bool? result = openFileDialog.ShowDialog();
+        if (result == true)
         {
             try
             {
@@ -105,24 +108,24 @@ public partial class ColorModsEditor : Window
                     {
                         if (colorModsDict.TryGetValue(mod.Name, out var modData))
                         {
-                            if (modData.TryGetValue("enabled", out var enabledObj) 
+                            if (modData.TryGetValue("enabled", out var enabledObj)
                                 && (enabledObj.ValueKind == System.Text.Json.JsonValueKind.True || enabledObj.ValueKind == System.Text.Json.JsonValueKind.False))
                             {
                                 mod.IsSelected = enabledObj.GetBoolean();
                             }
-                            if (modData.TryGetValue("color", out var colorObj) 
+                            if (modData.TryGetValue("color", out var colorObj)
                                 && colorObj.ValueKind == System.Text.Json.JsonValueKind.String)
                             {
                                 mod.SelectedColor = colorObj.GetString() ?? string.Empty;
                             }
                         }
                     }
-                    MessageBox.Show("Color mods loaded successfully.", "Success");
+                    System.Windows.MessageBox.Show("Color mods loaded successfully.", "Success");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to load color mods: {ex.Message}", "Error");
+                System.Windows.MessageBox.Show($"Failed to load color mods: {ex.Message}", "Error");
             }
         }
     }
@@ -131,10 +134,10 @@ public partial class ColorModsEditor : Window
     {
         var dialog = new ColorModsEditor(colorMods);
 
-        if (Application.Current.MainWindow != null)
+        if (System.Windows.Application.Current.MainWindow != null)
         {
-            dialog.Owner = Application.Current.MainWindow;
-            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            dialog.Owner = System.Windows.Application.Current.MainWindow;
+            dialog.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
         }
 
         return dialog.ShowDialog() == true;

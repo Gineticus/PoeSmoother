@@ -25,6 +25,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
     <PackageReference Include="LibGGPK3.LibBundledGGPK3" Version="2.6.11" />
   </ItemGroup>
 

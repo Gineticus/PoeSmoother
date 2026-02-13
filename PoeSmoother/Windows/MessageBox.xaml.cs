@@ -41,15 +41,15 @@ public partial class MessageBox : Window
     {
         // Play notification sound
         SystemSounds.Asterisk.Play();
-        
+
         var dialog = new MessageBox(message, title);
-        
-        if (Application.Current.MainWindow != null)
+
+        if (System.Windows.Application.Current.MainWindow != null)
         {
-            dialog.Owner = Application.Current.MainWindow;
+            dialog.Owner = System.Windows.Application.Current.MainWindow;
             dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
         }
-        
+
         dialog.ShowDialog();
     }
 }

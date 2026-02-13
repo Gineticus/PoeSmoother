@@ -1,6 +1,7 @@
 # PoeSmoother
 
-![Window](Images/window.png)
+<img width="585" height="592" alt="image" src="https://github.com/user-attachments/assets/cd416059-4018-415d-9c2a-7fa0a2cd109e" />
+<img width="283" height="507" alt="image" src="https://github.com/user-attachments/assets/5ffdfe14-bc74-4307-8df0-b70d05fa74bb" />
 
 ## Features
 
@@ -41,6 +42,9 @@
 
 ### PoE 2
 
+- **Minimap Patch**
+  - Allows adjusting the Minimap color scheme
+    
 - **Camera Patch**
   - Allows adjusting the default camera zoom level (1.2x to 2.4x)
 

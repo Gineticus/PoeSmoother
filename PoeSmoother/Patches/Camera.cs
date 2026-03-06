@@ -154,13 +154,13 @@ public class Camera : IPatch
                                 if (data.Contains("CreateCameraZoomNode"))
                                 {
                                     int x = lines.FindIndex(line => line.Contains("CreateCameraZoomNode"));
-                                    lines[x] = $"\ton_initial_position_set = \"CreateCameraZoomNode(5000.0, 5000.0, {zoomLevelString});\" ";
+                                    lines[x] = $"\ton_initial_position_set = {{CreateCameraZoomNode(5000.0, 5000.0, {zoomLevelString});}} ";
                                 }
                                 else
                                 {
                                     int index = lines.FindIndex(x => x.Contains("team = 1"));
                                     if (index == -1) continue;
-                                    lines.Insert(index + 1, $"\ton_initial_position_set = \"CreateCameraZoomNode(5000.0, 5000.0, {zoomLevelString});\" ");
+                                    lines.Insert(index + 1, $"\ton_initial_position_set = {{CreateCameraZoomNode(5000.0, 5000.0, {zoomLevelString});}} ");
                                 }
                                 string newData = string.Join("\r\n", lines);
                                 var newBytes = System.Text.Encoding.Unicode.GetBytes(newData);

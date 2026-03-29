@@ -19,7 +19,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.x'
+        dotnet-version: '10.0.x'
         
     - name: Restore dependencies
       run: dotnet restore PoeSmoother/PoeSmoother.csproj
@@ -46,7 +46,7 @@ jobs:
           
           ### System Requirements
           - Windows 10 version 2004 or later
-          - .NET 9.0 Runtime (included in self-contained build)
+          - .NET 10.0 Runtime (included in self-contained build)
         draft: false
         prerelease: false
       env:

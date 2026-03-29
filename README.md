@@ -102,7 +102,7 @@
 ## System Requirements
 
 - **Operating System:** Windows 10 version 2004 or later / Windows 11
-- **Runtime:** .NET 9.0 Runtime (included in self-contained build)
+- **Runtime:** .NET 10.0 Runtime (included in self-contained build)
 
 ## Support
 

@@ -123,10 +123,6 @@ public class Camera : IPatch
         if (string.IsNullOrEmpty(data))
             return;
 
-        if (data.Contains("camera", StringComparison.OrdinalIgnoreCase)) {
-            Console.WriteLine(record.Path);
-        }
-
         if (!_functions.Any(func => data.Contains(func)))
             return;
 

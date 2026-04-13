@@ -8,7 +8,7 @@
     <RootNamespace>PoeRedux</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>..\icon.ico</ApplicationIcon>
-    <Version>1.1.6</Version>
+    <Version>1.1.7</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">

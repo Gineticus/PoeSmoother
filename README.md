@@ -39,6 +39,9 @@
 - **Effects Patch**
   - Disables all effects in the game
 
+- **Black Screen Patch (Experimental)**
+  - Makes the screen black
+
 ### PoE 2
 
 - **Camera Patch**

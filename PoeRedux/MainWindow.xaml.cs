@@ -64,6 +64,7 @@ public partial class MainWindow : Window
             new Delirium(),
             new Particles(),
             new Effects(),
+            new BlackScreen(),
         };
 
         foreach (var patch in patchInstances)
